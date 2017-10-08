@@ -1,7 +1,7 @@
 JavaScript Object Creation with ES6 and TypeScript
 =======
 
-![Creational Design Patterns](1-patterns.jpg)
+![Creational Design Patterns](img/patterns.jpg)
 _(Credit: https://web.njit.edu/~sdr3/DesignPatterns/creational.html)_
 
 ## Intro

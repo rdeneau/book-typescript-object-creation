@@ -1,3 +1,3 @@
 # Summary
 
-* [Object Literal](docs/object-literal.md)
+* [Object Literal](doc/object-literal.md)

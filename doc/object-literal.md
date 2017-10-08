@@ -276,10 +276,6 @@ More details in [Function Overloads in TypeScript, by Marius Schulz, Aug 2016].
 
 Little warning: make sure of listing all the overloads and then write the main function. The TypeScript FAQ mentions the case of the last signature missing, mixed with the main function: see the question ["Why am I getting Supplied parameters do not match any signature error?"](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-am-i-getting-supplied-parameters-do-not-match-any-signature-error).
 
-### Adding or removing a property
-
-TODO
-
 --
 
 TODO: ne pas confondre avec les interfaces
