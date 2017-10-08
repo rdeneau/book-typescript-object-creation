@@ -1,6 +1,6 @@
 # Object Literal Basics
 
-Object literal is the simplest way of creating an object. Still, it's already sufficiently rich for object-oriented programming. Let's explore some of their basics:
+Object literal is the simplest way of creating an object. Still, it's already sufficiently rich for object-oriented programming. Let's explore some of its basics:
 
 * [Object nature](#Object-nature)
 * [Object literal syntax](#Object-literal-syntax)
