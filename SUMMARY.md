@@ -3,12 +3,13 @@
 * Object Literal
   * [Basics](doc/object-literal-basics.md)
   * [Advanced features](doc/object-literal-advanced.md)
+* Class
+  * [Basics](doc/class-basics.md)
+  * [Class Inheritance](doc/class-inheritance.md)
+* Object Composition
+  * [Basics](doc/object-composition.md)
+  * Mixins and more
 * Object Producers
-  * Factories, Constructors, Classes
+  * Factories
   * Fluent builders
-* Inheritance
-  * Conventional Inheritance
-  * Functional Inheritance
-    * Mixins
-    * Traits
-* Immutability
+* [Immutable objects](doc/immutability.md)

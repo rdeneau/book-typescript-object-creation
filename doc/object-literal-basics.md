@@ -2,13 +2,13 @@
 
 Object literal is the simplest way of creating an object. Still, it's already sufficiently rich for object-oriented programming. Let's explore some of its basics:
 
-* [Object nature](#Object-nature)
-* [Object literal syntax](#Object-literal-syntax)
-* [JSON](#JSON)
-* [Property names](#Property-names)
-* [ECMAScript 2015](#ECMAScript-2015)
-* [Accessors](#Accessors)
-* [TypeScript `readonly` keyword](#typescript-readonly-keyword)
+- [Object nature](#Object-nature)
+- [Object literal syntax](#Object-literal-syntax)
+- [JSON](#JSON)
+- [Property names](#Property-names)
+- [ECMAScript 2015](#ECMAScript-2015)
+- [Accessors](#Accessors)
+- [TypeScript `readonly` keyword](#typescript-readonly-keyword)
 
 ## Object nature
 
@@ -23,7 +23,7 @@ There are two kinds of special properties:
 
 The object literal syntax a.k.a. [initializer notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) provides a handy and simple way to create a plain object in JavaScript (an instance of `Object`): name-value pairs separated by a comma and enclosed inside curly braces: `{ color: 'green', message: 'hello' }`.
 
-> _“The ability to directly create objects is one of JavaScript’s standout features: you can start with concrete objects (no classes needed!) and introduce abstractions later.” ~ Dr. Axel Rauschmayer in his book [Speaking JavaScript](http://speakingjs.com/es5/ch17.html#object_literals)_
+> “The ability to directly create objects is one of JavaScript’s standout features: you can start with concrete objects (no classes needed!) and introduce abstractions later.” _~ Dr. Axel Rauschmayer in his book [Speaking JavaScript](http://speakingjs.com/es5/ch17.html#object_literals)_
 
 To avoid an object literal at the beginning of a statement to be interpreted as the beginning of a block `{...}`, it can be enclosed in parentheses `({ a: 1 })`. It's often the case with fat-arrow function:
 
@@ -52,6 +52,7 @@ Property names can be:
 - A number: this leaves the door open to all sort of quirks, like the `Array`-like [`arguments` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments).
 
 Considering the object `o = { a: 'a', 'b': 'b', 3: 'c' }`, its properties can be accessed using:
+
 - dot notation when the property name is a valid identifier (`o.a`), even with a name declared in quotes (`o.b`),
 - square bracket / `Array`-like notation in any case, with the property name:
   - enclosed in quotes (`o['b']`), even with a name declared without quotes (`o['a']`), even for a name declared with a number (`o['3']`).
