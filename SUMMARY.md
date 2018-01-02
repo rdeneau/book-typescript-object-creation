@@ -5,7 +5,7 @@
   * [Advanced features](doc/object-literal-advanced.md)
 * Class
   * [Basics](doc/class-basics.md)
-  * [Class Inheritance](doc/class-inheritance.md)
+  * [Inheritance](doc/class-inheritance.md)
 * Object Composition
   * [Basics](doc/object-composition.md)
   * Mixins and more

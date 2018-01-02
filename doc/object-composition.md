@@ -45,7 +45,7 @@ Beware that in UML, composition has a more narrow meaning than in ordinary langu
 
 The generalization relationship is also known as the _inheritance_ or "is a" relationship.
 
-## [Delegation](https://en.wikipedia.org/wiki/Delegation_(object-oriented_programming))
+## [Delegation](https://en.wikipedia.org/wiki/Delegation_%28object-oriented_programming%29)
 
 Refers to evaluating a member (property or method) of one object (the receiver/delegate) in the context of another object (the sender/wrapper).
 
@@ -58,7 +58,7 @@ Implicit delegation is the fundamental method for behavior reuse in prototype-ba
 
 In JavaScript, _delegation_ already happens implicitly when the `prototype` chain is walked in order to find a member that might be related to but is not directly owned by an object. Once the method was found it gets called within this objects context. It happens also more explicitly, using `apply`, `call` and `bind` to provide a value to `this` that is used in the body of the target function.
 
-## [Forwarding](https://en.wikipedia.org/wiki/Forwarding_(object-oriented_programming))
+## [Forwarding](https://en.wikipedia.org/wiki/Forwarding_%28object-oriented_programming%29)
 
 Refers to evaluating a member on one object by evaluating the corresponding member on another object, notably in the context of the receiving object.
 
@@ -72,3 +72,13 @@ They can confused because they ressemble. In both cases, there are two objects: 
 _Implicit delegation_ and _forwarding_ ressemble even more. In both cases, the wrapper doesn't pass itself to the wrappee. The wrappee is not aware of the wrapper. The association is unidirectional.
 
 Another source of confusion: the [delegation pattern](https://en.wikipedia.org/wiki/Delegation_pattern) which is more a kind of _forwarding_!
+
+
+---
+
+## Warning foreword
+
+> Inheritance should be used with care, due to the strong coupling between base and derived classes, breaking the [S**O**LID Open/Closed Principle](https://en.wikipedia.org/wiki/Open/closed_principle). Ask yourself the question: "Is there really a 'is-a' relationship between both classes?". Any kind of [object composition](./object-composition.md) i.e. 'has-a' relationship should be considered first or during a refactoring phase (cf. [Red/Green/Refactor TDD mantra](https://en.wikipedia.org/wiki/Test-driven_development#Development_style)).
+>
+> Nevertheless, inheritance should not be banned too. Every technique has its advantages and drawbacks and can be appropriate in some situations. For instance, inheritance is used in the [Template Method Pattern](https://en.wikipedia.org/wiki/Template_method_pattern), despite the fact that [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) is a principle  given and applied in [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns).
+

@@ -1,6 +1,6 @@
 # JavaScript Object Creation - Immutability
 
-![Stained glass, Holy Family Church, Teconnaught](img/immutable.jpg)
+![Stained glass, Holy Family Church, Teconnaught](../img/immutable.jpg)
 _(Credit: [By Tahc (Own work), via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Stained_glass,_Holy_Family_Church,_Teconnaught,_September_2010_crop.jpg))_
 
 > ⚠️ Work in progress! 🚧

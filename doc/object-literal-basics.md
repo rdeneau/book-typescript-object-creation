@@ -2,13 +2,17 @@
 
 Object literal is the simplest way of creating an object. Still, it's already sufficiently rich for object-oriented programming. Let's explore some of its basics:
 
-- [Object nature](#Object-nature)
-- [Object literal syntax](#Object-literal-syntax)
-- [JSON](#JSON)
-- [Property names](#Property-names)
-- [ECMAScript 2015](#ECMAScript-2015)
-- [Accessors](#Accessors)
+<!-- TOC depthFrom:2 depthTo:2 -->
+
+- [Object nature](#object-nature)
+- [Object literal syntax](#object-literal-syntax)
+- [JSON](#json)
+- [Property names](#property-names)
+- [ECMAScript 2015](#ecmascript-2015)
+- [Accessors](#accessors)
 - [TypeScript `readonly` keyword](#typescript-readonly-keyword)
+
+<!-- /TOC -->
 
 ## Object nature
 

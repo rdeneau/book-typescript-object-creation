@@ -1,11 +1,13 @@
 # Object Literal Advanced Features
 
-* [`this` keyword](#this-keyword)
-* [Fat-arrow syntax](#Fat-arrow-syntax)
-* [Dynamic JavaScript and TypeScript typings](#Dynamic-JavaScript-and-TypeScript-typings)
-  * [Non existent property](#Non-existent-property)
-  * [Changing a property type](#Changing-a-property-type)
-* [Function overloads](#Function-overloads)
+<!-- TOC depthFrom:2 depthTo:2 -->
+
+- [`this` keyword](#this-keyword)
+- [Fat-arrow syntax](#fat-arrow-syntax)
+- [Dynamic JavaScript and TypeScript typings](#dynamic-javascript-and-typescript-typings)
+- [Function overloads](#function-overloads)
+
+<!-- /TOC -->
 
 ## `this` keyword
 
@@ -31,6 +33,7 @@ _More details in [The Complete Rules to 'this'](https://www.educative.io/collect
 `this` is an object-oriented concept. JavaScript incorporates also some functional programming aspects, inspired by [Scheme](https://en.wikipedia.org/wiki/Scheme_%28programming_language%29), including first-class functions. It enables us to copy a method into an outside variable, this copy being detached from its initial parent object. Hence, `this` inside the function does not point to its former parent object. The mixture of OOP and FP has led to these previous and a bit convoluted behaviors of `this`.
 
 For a more detailed and funny explanations, I suggest you to watch the following _FunFunFunction_ episodes:
+
 - [#43 - Object Creation in JavaScript Part 1 - `this` and `bind`](https://youtu.be/GhbhD1HR5vk)
 - [#44 - Object Creation in JavaScript Part 2 - Examples of `this` and `bind`](https://youtu.be/PIkA60I0dKU).
 

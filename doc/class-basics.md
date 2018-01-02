@@ -1,8 +1,26 @@
 # Class
 
-TODO: intro
-Class = moyen de séparer le type (car un objet literal porte son type)
-Typage statique (du moins à un instant donné puisque les classes aussi peuvent être modifiées)
+A JavaScript object literal mixes values and a type, dynamically: the type may evolve as values change their type, are added or deleted. The object can even have children using [`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create).
+
+Classes have been introduced in JavaScript with ECMAScript-6 (ES6):
+
+- First to replace the previous pattern that simulated classes and was used for a long time, even before `Object.create()`,
+- Then to offer a way to split a type from an object i.e. from a collection of keys/values, when this type is not meant to change, thus to handle static typing.
+
+TypeScript goes further, offering member visibility to handle encapsulation and interfaces to... TODO: terminer ()
+
+TODO: diff entre propriété définie hors du constructor et dans le constructor en tant qu'arguments
+
+<!-- TOC depthFrom:2 depthTo:2 -->
+
+- [ES6 class](#es6-class)
+- [TypeScript class](#typescript-class)
+- [Class prototype](#class-prototype)
+- [TypeScript interfaces](#typescript-interfaces)
+- [Class pitfalls](#class-pitfalls)
+- [Type tricks](#type-tricks)
+
+<!-- /TOC -->
 
 ## ES6 class
 
@@ -45,7 +63,7 @@ var Todo = /** @class */ (function () {
 }());
 ```
 
-In fact, this is how TypeScript transpiled the `Todo` class. But this is not the exact equivalent because ES6 class methods are not _enumerable_:
+In fact, this is how TypeScript transpiled the `Todo` class to ES5. But this is not the exact equivalent because ES6 class methods are not _enumerable_:
 
 ```js
 Object.getOwnPropertyDescriptor(Todo.prototype, 'do')
@@ -192,6 +210,8 @@ Interfaces in TypeScript are used not only to name object and function types, bu
 
 - [**I**nterface segregation principle (ISP)](https://en.wikipedia.org/wiki/Interface_segregation_principle)
 - [**D**ependency inversion principle (DIP)](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
+
+For me it's the advantage of TypeScript over JavaScript regarding OOP.
 
 Notice that a class can be used as an interface: `class ClassA implements ClassB` is allowed. Indeed, TypeScript applies [structural typing](https://en.wikipedia.org/wiki/Structural_type_system). This is useful to turn dependency injection to dependency inversion for free and to create test doubles easily:
 
