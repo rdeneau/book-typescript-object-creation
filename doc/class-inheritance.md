@@ -212,7 +212,7 @@ class JoeGreeter extends GreeterBase {
 // => No runtime errors
 ```
 
-> :bulb: If your IDE does not indicate when a member in a derived class overrides a base class member, a good practice in your team can be to do it manually with a comment or a Java-like `@override` decorator that checks whether it's really an override. Ryan Cavanaugh, member of the TypeScript Team @ Microsoft, has given such a decorator in [this comment](https://github.com/Microsoft/TypeScript/issues/2000#issuecomment-99158699):
+> 💡 If your IDE does not indicate when a member in a derived class overrides a base class member, a good practice in your team can be to do it manually with a comment or a Java-like `@override` decorator that checks whether it's really an override. Ryan Cavanaugh, member of the TypeScript Team @ Microsoft, has given such a decorator in [this comment](https://github.com/Microsoft/TypeScript/issues/2000#issuecomment-99158699):
 
 ```ts
 const override: MethodDecorator = (target, key, descriptor) => {

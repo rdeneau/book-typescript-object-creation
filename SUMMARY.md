@@ -6,6 +6,7 @@
 * Class
   * [Basics](doc/class-basics.md)
   * [Inheritance](doc/class-inheritance.md)
+  * [Alternative](doc/class-alternative.md)
 * Object Composition
   * [Basics](doc/object-composition.md)
   * Mixins and more

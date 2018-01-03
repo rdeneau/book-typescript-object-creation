@@ -1,21 +1,26 @@
 # Class
 
-A JavaScript object literal mixes values and a type, dynamically: the type may evolve as values change their type, are added or deleted. The object can even have children using [`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create).
+> 🚧 **Work in progress**
 
-Classes have been introduced in JavaScript with ECMAScript-6 (ES6):
+⚠️ TODO:
 
-- First to replace the previous pattern that simulated classes and was used for a long time, even before `Object.create()`,
-- Then to offer a way to split a type from an object i.e. from a collection of keys/values, when this type is not meant to change, thus to handle static typing.
+- pas de classe interne
+- conclusion
 
-TypeScript goes further, offering member visibility to handle encapsulation and interfaces to... TODO: terminer ()
+---
 
-TODO: diff entre propriété définie hors du constructor et dans le constructor en tant qu'arguments
+Classes have been introduced in ECMAScript 2015 (ES6) to offer a clean and Java-like syntax over the usual prototype-based construct. The purpose is the same: it's a structure to store an object type and to create objects instances of that type, with an initial state and some methods defined in the prototype.
+
+Both the class and the instances can be modified at run-time, especially adding members, thus defining a new type. But classes are more appropriate for objects that don't change their type, thus to handle a static typed programming style. It suits well TypeScript and its type inference.
+
+TypeScript goes further on class features, offering member visibility to handle encapsulation, read-only members, properties created within the constructor, class contract with interfaces.
 
 <!-- TOC depthFrom:2 depthTo:2 -->
 
 - [ES6 class](#es6-class)
 - [TypeScript class](#typescript-class)
-- [Class prototype](#class-prototype)
+- [Property declarations](#property-declarations)
+- [Class oriented programming](#class-oriented-programming)
 - [TypeScript interfaces](#typescript-interfaces)
 - [Class pitfalls](#class-pitfalls)
 - [Type tricks](#type-tricks)
@@ -128,7 +133,7 @@ Use case examples:
 
 TypeScript doesn't fully support constructor function: the type inference will fail. For instance, with the `Todo` function above, the inferred type of the variable `const todo = new Todo('');` is `any`!
 
-TypeScript fully supports ES6 class, proposing an enhanced syntax to simplify giving member types and to handle member encapsulation (`public` by default, `protected` or `private`) and life time (`readonly` to mimic a get-only property).
+In contrast, TypeScript fully supports ES6 class, proposing an enhanced syntax to simplify giving member types and to handle member encapsulation (`public` by default, `protected` or `private`) and life time (`readonly` to mimic a get-only property).
 
 Direct translation in TypeScript of the previous `Todo` ES6 class needs additional types that cannot be inferred:
 
@@ -152,7 +157,7 @@ class Todo {
 }
 ```
 
-This can be simplified and enhanced :
+The previous code, basically translated from ES6, can be simplified and enhanced:
 
 - `done` can be initialized directly `done = false;`, the default value allowing to infere its `boolean` type.
 - `name` property can be declared within the constructor, via the `public` keyword, with its default value also giving its `string` type. It can be marked as `readonly`, so that `public` can be omitted because its the implicit visibility in TypeScript.
@@ -195,7 +200,43 @@ class Todo {
 }
 ```
 
-## Class prototype
+## Property declarations
+
+TypeScript enables to define properties outside and within the constructor, both features not available in ES6:
+
+- Properties defined outside the constructor and only with their type: these are pure TypeScript definitions that are not transpiled to JavaScript.
+- Properties defined outside the constructor and with a default value and optionaly with their type (if the type cannot be inferred or for the type everywhere coding style): these properties are transpiled into the constructor body.
+- Properties defined within the constructor via arguments flagged with a visibility (`public`, `protected` or `private`) or with the `readonly` keyword, with or without default values, optional or not: these properties are also transpiled into the constructor body, with their the specified default values else `undefined`.
+
+Example:
+
+```ts
+class Example {
+    prop1?: number;
+    prop2: number;
+    prop3 = true;
+    constructor(
+        private prop4: string,
+        public prop5?: any,
+        private prop6 = 'prop6',
+        otherArg = 'other'
+    ) { }
+}
+const o = new Example('prop4');
+// → { prop4: "prop4", prop5: undefined, prop6: "prop6", prop3: true }
+```
+
+Remarks:
+
+- `prop1`: not in the object,
+- `prop2`: the same, even if required in TypeScript (cf. no `?`)
+- `prop3`: in the object, with the default value, but defined after the "constructor" properties,
+- `prop4`: in the object, with the value specified as argument, even though `private` in TypeScript,
+- `prop5`: in the object with the value `undefined`,
+- `prop6`: in the object with the default value,
+- `otherArg`: not in the object - just an argument of the function.
+
+## Class oriented programming
 
 So the object properties are stored directly in the object, each instance having its own state, while the methods are stored in the class/constructor prototype i.e. in the object `__proto__`, all instances sharing the class behaviour.
 
@@ -233,14 +274,14 @@ I invite you to read its article coming right after the previous one, [Towards b
 
 ## Class pitfalls
 
-Classes are well supported in TypeScript because they gather an object type and an object/instance factory (the constructor) in the same place. Type inference is made easier. But it leads to using a `constructor` combined with the `new` operator, both with tricks in JavaScript espacially regarding the `this` keyword, while it's the routine of C#/Java programmers. Hopefully, TypeScript prevents some common mistakes:
+Classes are well supported in TypeScript because they gather an object type and an object/instance factory (the constructor) in the same place. Type inference is made easier. But it leads to using a `constructor` combined with the `new` operator, both usual tricks in JavaScript especially regarding the `this` keyword, while it's the routine of C#/Java programmers. Hopefully, TypeScript prevents some common mistakes:
 
 - A constructor can still have an explicit return statement, different from the implicit `this`, but the return value must have a compatible type with the current class. Otherwise, we get the error `Return type of constructor signature must be assignable to the instance type of the class`.
 - Calling the class constructor without the `new` operator, e.g. `const todo = Todo();`, gives the error `value of type 'typeof Todo' is not callable. Did you mean to include 'new'?`.
 
 ## Type tricks
 
-Another difficulty with TypeScript class relates to types:
+Another difficulty with TypeScript classes relates to types:
 
 - Types are seen at the TypeScript level i.e. at compile-time.
   - The type of an instance of class A is A.
