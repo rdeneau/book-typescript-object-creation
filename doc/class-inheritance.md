@@ -288,3 +288,13 @@ Regarding class inheritance usage, it appears to be a fast and cheap way to shar
 _Source: [Evolution of object behavior using context relations](https://www2.ccs.neu.edu/research/demeter/papers/context-journal/node2.html)_
 
 Almost all GoF patterns rely on composition. _Composition_, in any of its [various forms](object-composition.md), usually need a bit more code but is far more safer. It's a trade-off: it may be a bit more complicated locally but will improve the overall design.
+
+To finish, let's compare how [Angular](https://angular.io/) and [React](https://reactjs.org/) deal with classes and inheritance regarding their component creation:
+
+- **Angular**:
+  - A component is a class decorated with `@Component()` _→ No inheritance, rather [AOP](https://en.wikipedia.org/wiki/Aspect-oriented_programming)._
+  - [Lifecycle Hooks](https://angular.io/guide/lifecycle-hooks) are based on methods (e.g. `ngOnInit()`) whose signatures are defined in different interfaces (e.g. `OnInit`) _→ Applying [ISP](https://en.wikipedia.org/wiki/Interface_segregation_principle)._
+- **React**: [offers several approaches](https://reactjs.org/docs/components-and-props.html):
+  - Functional component: no class - just a JavaScript function that takes a single arguments `props` (for properties) and returns a React element, for instance using JSX/TSX html-like syntax → _Functional approach._
+  - Class component: a class extending the abstract base class [React.Component](https://reactjs.org/docs/react-component.html) and implementing at least the `render()` method or other [lifecycle methods](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) like `componentDidMount()` → _Class inheritance._
+  - The factory `React.createClass()` has been [deprecated](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html#migrating-from-reactcreateclass) then removed from [React 16, Sept 2017](https://github.com/facebook/react/releases/tag/v16.0.0), to favor either first two options.

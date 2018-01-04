@@ -1,14 +1,5 @@
 # Class
 
-> 🚧 **Work in progress**
-
-⚠️ TODO:
-
-- pas de classe interne
-- conclusion
-
----
-
 Classes have been introduced in ECMAScript 2015 (ES6) to offer a clean and Java-like syntax over the usual prototype-based construct. The purpose is the same: it's a structure to store an object type and to create objects instances of that type, with an initial state and some methods defined in the prototype.
 
 Both the class and the instances can be modified at run-time, especially adding members, thus defining a new type. But classes are more appropriate for objects that don't change their type, thus to handle a static typed programming style. It suits well TypeScript and its type inference.
@@ -20,10 +11,13 @@ TypeScript goes further on class features, offering member visibility to handle 
 - [ES6 class](#es6-class)
 - [TypeScript class](#typescript-class)
 - [Property declarations](#property-declarations)
-- [Class oriented programming](#class-oriented-programming)
+- [Function properties](#function-properties)
+- [Nested classes](#nested-classes)
+- [Class pitfalls and TypeScript safety net](#class-pitfalls-and-typescript-safety-net)
 - [TypeScript interfaces](#typescript-interfaces)
-- [Class pitfalls](#class-pitfalls)
-- [Type tricks](#type-tricks)
+- [TypeScript programming style](#typescript-programming-style)
+- [TypeScript type tricks](#typescript-type-tricks)
+- [Conclusion](#conclusion)
 
 <!-- /TOC -->
 
@@ -236,14 +230,29 @@ Remarks:
 - `prop6`: in the object with the default value,
 - `otherArg`: not in the object - just an argument of the function.
 
-## Class oriented programming
+## Function properties
 
 So the object properties are stored directly in the object, each instance having its own state, while the methods are stored in the class/constructor prototype i.e. in the object `__proto__`, all instances sharing the class behaviour.
 
-An object can also have a property which is a function. We are in between state and behaviour. This a useful to split an algorithm into invariant versus variant parts. This kind of properties are conceptually similar to [Strategy](https://en.wikipedia.org/wiki/Strategy_pattern) classes reduced to only one function or a method of the [Template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern). In this case, you may try to refactor to one of these patterns and verify whether it has helped reading the code in revealing its intent more clearly.
+An object can also have a _property which is a function_. We are in between state and behaviour. This a useful to split an algorithm into invariant versus variant parts. This kind of properties are conceptually similar to [Strategy](https://en.wikipedia.org/wiki/Strategy_pattern) classes reduced to only one function or a method of the [Template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern). In this case, you may try to refactor to one of these patterns and verify whether it has helped reading the code in revealing its intent more clearly.
 
-Indeed, TypeScript is much more class friendly than pure JavaScript. So TypeScript code may ressemble more to C#/Java than to usual JavaScript. If you opt for a more _functional programming_ way of coding in JavaScript, TypeScript may not be the perfect choice but you can try, perhaps with the help of additional libraries like [ImmutableJs](https://github.com/facebook/immutable-js), [Ramda](http://ramdajs.com/), [Fantasy-Land](https://github.com/fantasyland), [Fluture](https://github.com/fluture-js), [Folktale](http://folktale.origamitower.com/)
-, [Sanctuary](https://github.com/sanctuary-js)... Or you can opt for another higher language that compile back to JavaScript, like F# and [Fable](http://fable.io/), OCaml and [Reason(ML)](https://reasonml.github.io/). But this is out of the scope of this article.
+## Nested classes
+
+Neither ES6 nor TypeScript support [nested classes](https://en.wikipedia.org/wiki/Inner_class). Indeed, ES6 and especially ES6 modules make preferring a flat code design rather than nested structures. This is why TypeScript `namespace` is not recommanded in an ES6 module.
+
+Nevertheless, if you want some kind of nested classes, these constructs can be appropriate surrogates:
+
+- Classes in an ES6 module that are not exported.
+- Classes defined in a function.
+
+## Class pitfalls and TypeScript safety net
+
+Classes are well supported in TypeScript because they gather an object type and an object/instance factory (the constructor) in the same place. Type inference is made easier. But it leads to using a `constructor` combined with the `new` operator, both usual tricks in JavaScript especially regarding the `this` keyword, while it's the routine of C#/Java programmers.
+
+Hopefully, TypeScript prevents some common mistakes:
+
+- A constructor can still have an explicit return statement, different from the implicit `this`, but the return value must have a compatible type with the current class. Otherwise, we get the error `Return type of constructor signature must be assignable to the instance type of the class`.
+- Calling the class constructor without the `new` operator, e.g. `const todo = Todo();`, gives the error `value of type 'typeof Todo' is not callable. Did you mean to include 'new'?`.
 
 ## TypeScript interfaces
 
@@ -272,14 +281,22 @@ However, beware that interfaces strictly identical to their implementations are 
 
 I invite you to read its article coming right after the previous one, [Towards better abstractions](http://blog.ploeh.dk/2010/12/03/Towardsbetterabstractions/), that provides some guidance for a good interface design. Its examples, although given in C#, are still readable and valuable for TypeScript programmers.
 
-## Class pitfalls
+## TypeScript programming style
 
-Classes are well supported in TypeScript because they gather an object type and an object/instance factory (the constructor) in the same place. Type inference is made easier. But it leads to using a `constructor` combined with the `new` operator, both usual tricks in JavaScript especially regarding the `this` keyword, while it's the routine of C#/Java programmers. Hopefully, TypeScript prevents some common mistakes:
+TypeScript leads developers to adopt its own programming style, in between ES6 and C#/Java. Using classes, interfaces, generics is made possible, which can be the choice of programmers with C#/Java background.
 
-- A constructor can still have an explicit return statement, different from the implicit `this`, but the return value must have a compatible type with the current class. Otherwise, we get the error `Return type of constructor signature must be assignable to the instance type of the class`.
-- Calling the class constructor without the `new` operator, e.g. `const todo = Todo();`, gives the error `value of type 'typeof Todo' is not callable. Did you mean to include 'new'?`.
+If it's done extensively, the code may come to resemble more C#/Java than JavaScript, including unnecessary `public` keywords, unnecessary type declarations that can be inferred from the value, ...!
 
-## Type tricks
+It's better to have learned core JavaScript deeply to make good JavaScript with TypeScript and envoy what it provides:
+
+- Safety net and dependencies made more explicit with typings,
+- Missing features in JavaScript like encaspulation, "read-only-ability",
+- ...
+
+JavaScript also enables a more _functional programming_ way of coding. It's one of the [two pillars of JavaScript](https://medium.com/javascript-scene/the-two-pillars-of-javascript-pt-2-functional-programming-a63aa53a41a4). TypeScript does not inhibit such programming style but its type inference is in this case more "limited" and coding may be less easy, less fluid. So TypeScript may not be the perfect choice but you can try, perhaps with the help of additional libraries like [ImmutableJs](https://github.com/facebook/immutable-js), [Ramda](http://ramdajs.com/), [Fantasy-Land](https://github.com/fantasyland), [Fluture](https://github.com/fluture-js), [Folktale](http://folktale.origamitower.com/)
+, [Sanctuary](https://github.com/sanctuary-js)... Or you can opt for another higher-level language that compile back to JavaScript, like F# with [Fable](http://fable.io/) or OCaml with [Reason(ML)](https://reasonml.github.io/). But this is out of the scope of this article.
+
+## TypeScript type tricks
 
 Another difficulty with TypeScript classes relates to types:
 
@@ -291,6 +308,19 @@ Another difficulty with TypeScript classes relates to types:
 - Classes remains function constructor at runtime. They can be stored in variables (the type of the variable `const TodoCtor = Todo;` is `typeof Todo`) and specified as argument **value**, with several possible generic types:
   - `Function`: to call `apply`, `bind`, `call` or access the `prototype` property
   - `type Constructor<T> = new (...args: any[]) => T;`:
-    - to encapsulate the call to `new MyClass()`:  `function instanciate<T>(ctor: Constructor<T>) { return new ctor(); }` and then `const todo = instanciate(Todo);`
+    - to encapsulate the call to `new MyClass()`: `function instanciate<T>(ctor: Constructor<T>) { return new ctor(); }` and then `const todo = instanciate(Todo);`
     - to encapsulate the call to `extends MyClass` in a class factory: cf. [Mixin Classes](https://blog.mariusschulz.com/2017/05/26/typescript-2-2-mixin-classes).
 - The type of the `prototype` of the class `Todo` is `Todo`: this is an approximation because the prototype has only the class methods, not the class properties.
+
+## Conclusion
+
+Even with the nicer syntax in ES6, the "class pattern" is still considered as an overkill by a part of JavaScript community:
+
+- [`class` isn’t a baby  —  it’s a monster!](https://medium.com/@_ericelliott/class-isn-t-a-baby-it-s-a-monster-807a0f0b1298),
+- [Why Composition is Harder with Classes](https://medium.com/javascript-scene/why-composition-is-harder-with-classes-c3e627dcd0aa).
+
+Indeed, object literals and factories may do the job easier and better in most cases.
+
+But it's quite a different thing with TypeScript classes because there are enough additional features to balance class pattern issues. It's part of what TypeScript offers to enable a classical OOP using for instances [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) and [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)). It can easier and more totally fulfill C#/Java programmer needs. This is one of the reasons why [Angular](https://angular.io/) favors TypeScript and why Angular components are class-based.
+
+We have not yet analyse and discuss about [class inheritance](class-inheritance.md), supported by both ES6 and TypeScript. But this conclusion remains valid because we can use classes with or without class inheritance.
