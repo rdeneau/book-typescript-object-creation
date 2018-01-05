@@ -1,5 +1,10 @@
 # References
 
+## GitBook
+
+- [Cover](https://toolchain.gitbook.com/ebook.html#cover)
+- [Foot notes](https://github.com/GitbookIO/gitbook/blob/master/docs/syntax/markdown.md#footnotes)
+
 ## Articles
 
 ### [A fresh look at JavaScript Mixins, by Angus Croll, 2011](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
