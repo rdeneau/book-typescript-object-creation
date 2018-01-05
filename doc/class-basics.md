@@ -198,9 +198,18 @@ class Todo {
 
 TypeScript enables to define properties outside and within the constructor, both features not available in ES6:
 
-- Properties defined outside the constructor and only with their type: these are pure TypeScript definitions that are not transpiled to JavaScript.
-- Properties defined outside the constructor and with a default value and optionaly with their type (if the type cannot be inferred or for the type everywhere coding style): these properties are transpiled into the constructor body.
-- Properties defined within the constructor via arguments flagged with a visibility (`public`, `protected` or `private`) or with the `readonly` keyword, with or without default values, optional or not: these properties are also transpiled into the constructor body, with their the specified default values else `undefined`.
+- Properties defined outside the constructor and only with their type:
+  - They are pure TypeScript definitions that are not transpiled to JavaScript.
+  - _See `prop[12]` below_
+- Properties defined outside the constructor and with a default value,
+  - and optionaly with their type: if the type cannot be inferred or for the type everywhere coding style:
+  - These properties are transpiled into the constructor body.
+  - _See `prop3` below_
+- Properties defined within the constructor:
+  - via arguments flagged with a visibility (`public`, `protected` or `private`) or with the `readonly` keyword,
+  - with or without default values, optional or not:
+  - These properties are also transpiled into the constructor body, with their the specified default values else `undefined`.
+  - _See `prop[456]` below_
 
 Example:
 
@@ -216,11 +225,12 @@ class Example {
         otherArg = 'other'
     ) { }
 }
+
 const o = new Example('prop4');
 // → { prop4: "prop4", prop5: undefined, prop6: "prop6", prop3: true }
 ```
 
-Remarks:
+Analysis:
 
 - `prop1`: not in the object,
 - `prop2`: the same, even if required in TypeScript (cf. no `?`)
