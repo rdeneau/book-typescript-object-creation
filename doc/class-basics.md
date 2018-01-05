@@ -6,6 +6,8 @@ Both the class and the instances can be modified at run-time, especially adding 
 
 TypeScript goes further on class features, offering member visibility to handle encapsulation, read-only members, properties created within the constructor, class contract with interfaces.
 
+**Contents:**
+
 <!-- TOC depthFrom:2 depthTo:2 -->
 
 - [ES6 class](#es6-class)

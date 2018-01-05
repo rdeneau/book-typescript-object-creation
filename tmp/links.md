@@ -4,6 +4,7 @@
 
 - [Cover](https://toolchain.gitbook.com/ebook.html#cover)
 - [Foot notes](https://github.com/GitbookIO/gitbook/blob/master/docs/syntax/markdown.md#footnotes)
+- [Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908)
 
 ## Articles
 

@@ -9,7 +9,8 @@ ES6 and by extension TypeScript belong to the same OOP language family than C# a
 
 Notice that all classes already rely on inheritance, deriving from `Object` and so inheriting from [`hasOwnProperty()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty), [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString), ...
 
-Let's see it in detail:
+**Contents:**
+
 <!-- TOC depthFrom:2 depthTo:2 -->
 
 - [`extends` versus `implements` keywords](#extends-versus-implements-keywords)

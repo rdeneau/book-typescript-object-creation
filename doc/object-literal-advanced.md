@@ -1,10 +1,30 @@
 # Object Literal Advanced Features
 
-<!-- TOC depthFrom:2 depthTo:2 -->
+> ⚠️ **Work in progress**
+
+<!--
+
+Object destructuring: https://github.com/Microsoft/TypeScript/wiki/FAQ#why-cant-i-use-x-in-the-destructuring-function-f-x-number------ 
+
+--
+
+TODO: articles à continuer à lire:
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+- https://medium.com/javascript-scene/javascript-factory-functions-with-es6-4d224591a8b1
+
+-->
+
+**Contents:**
+
+<!-- TOC depthFrom:2 depthTo:3 -->
 
 - [`this` keyword](#this-keyword)
+    - [Rules](#rules)
+    - [Why](#why)
 - [Fat-arrow syntax](#fat-arrow-syntax)
 - [Dynamic JavaScript and TypeScript typings](#dynamic-javascript-and-typescript-typings)
+    - [Non existent property](#non-existent-property)
+    - [Changing a property type](#changing-a-property-type)
 - [Function overloads](#function-overloads)
 
 <!-- /TOC -->
@@ -28,7 +48,7 @@ If several rules apply, the rule with the lowest number wins and will set the `t
 
 _More details in [The Complete Rules to 'this'](https://www.educative.io/collection/page/5679346740101120/5707702298738688/5676830073815040) and on the [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)._
 
-### Why?
+### Why
 
 `this` is an object-oriented concept. JavaScript incorporates also some functional programming aspects, inspired by [Scheme](https://en.wikipedia.org/wiki/Scheme_%28programming_language%29), including first-class functions. It enables us to copy a method into an outside variable, this copy being detached from its initial parent object. Hence, `this` inside the function does not point to its former parent object. The mixture of OOP and FP has led to these previous and a bit convoluted behaviors of `this`.
 
@@ -161,16 +181,3 @@ Since JavaScript doesn't allow function overloads, it's a common pattern to hand
 More details in [Function Overloads in TypeScript, by Marius Schulz, Aug 2016].
 
 Little warning: make sure of listing all the overloads and then write the main function. The TypeScript FAQ mentions the case of the last signature missing, mixed with the main function: see the question ["Why am I getting Supplied parameters do not match any signature error?"](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-am-i-getting-supplied-parameters-do-not-match-any-signature-error).
-
-<!--
-
-TODO: ne pas confondre avec les interfaces
-Object destructuring: https://github.com/Microsoft/TypeScript/wiki/FAQ#why-cant-i-use-x-in-the-destructuring-function-f-x-number------ 
-
---
-
-TODO: articles à continuer à lire:
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
-- https://medium.com/javascript-scene/javascript-factory-functions-with-es6-4d224591a8b1
-
--->

@@ -1,6 +1,6 @@
 # Class alternatives
 
-> 🚧 Work in progress
+> ⚠️ **Work in progress**
 
 A JavaScript object literal mixes values and a type, dynamically: the type may evolve as values change their type, are added or deleted. The object can even have children using [`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create).
 
