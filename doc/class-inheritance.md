@@ -1,5 +1,7 @@
 # Class inheritance
 
+> ⚠️ **Work in progress**
+
 Inheritance is a feature of object-oriented programming (OOP) languages that allows to define:
 
 - a base class, aka superclass, mother class, that provides specific functionality: data and behavior,
@@ -16,6 +18,7 @@ Notice that all classes already rely on inheritance, deriving from `Object` and 
 - [`extends` versus `implements` keywords](#extends-versus-implements-keywords)
 - [Prototype chain](#prototype-chain)
 - [`super` keyword](#super-keyword)
+- [`instanceof` keyword](#instanceof-keyword)
 - [Member inheritance](#member-inheritance)
 - ["is a" relationship](#is-a-relationship)
 - [Use cases](#use-cases)
@@ -88,7 +91,7 @@ The `super` keyword serves two purposes:
 
 ### Base class constructor
 
-In a derived class constructor, `super` is a function representing the base class constructor. As soon as a derived class has a constructor, this constructor must start with a call to the super class constructor with the expected arguments:
+In a derived class constructor, `super` is a syntactical sugar for the base class constructor:
 
 ```ts
 abstract class Person {
@@ -116,9 +119,23 @@ function William() {
 }
 ```
 
-### Base class members
+There are no keywords for other ancestor constructors because constructors must form a chain following these rules:
 
-We can use `super` to access the base class members from an overriding member the same way we are using `this` for the current class members:
+- Like any individual classes, the base class constructor is optional.
+- If a base class constructor is not defined, so can be the derived class constructor.
+- But when a derived class has a constructor, this constructor must contains a call to the super class constructor, calling `super()` with its expected arguments. Else, there will be a TypeScript error on the constructor: `Constructors for derived classes must contain a 'super' call.`.
+- TypeScript compiler rules have been relaxed to allow to have some code preceeding the `super` call, as long as this code does not contain the `this` keyword. Otherwise, the TypeScript compiler will emit an error on the `this`: `'super' must be called before accessing 'this' in the constructor of a derived class.`.
+- In TypeScript previous versions, the `super` call had to be the first statement. It's the same in C#, with a special syntax to force following this rule: `DerivedClass(args) : base(baseArgs) {...}`. Notice that `super` is named `base` and that they are no `constructor` keyword, instead a method with that is named as the class, thus defining implicitly the return type (that must be specified otherwise, as opposed to TypeScript where the more it's inferred the better).
+- It could be bypassed in calling a static method (or another standalone function) inside the arguments of the `super()` call.
+
+These rules help ensuring that:
+
+- all constructors in the class hierarchy will be called.
+- the properties are defined in the proper order, making the instance of the derived class an instance of the base class too.
+
+### Base class methods
+
+We can use `super` to access the base class methods from an overriding member the same way we are using `this` for the current class members:
 
 ```ts
 abstract class Base {
@@ -134,6 +151,31 @@ class Child extends Base {
 
 - `super` has the type of the super class type, here `Base`.
 - `super.do()` is another syntactical sugar, equivalent of `Base.prototype.do.call(this);`.
+
+Instance methods being directly defined on `this` and not stored in the prototype, there is no need to use `super`: `this.baseInstanceMethod()` will work. But to override a base class instance method and still call this base version, use an arrow function to create a copy of `this`:
+
+```ts
+class Base {
+    do = function () {
+        console.log('base.do()');
+    };
+}
+
+class Child extends Base {
+    private base_do = this.do;
+
+    do = () => {
+        this.base_do();
+        console.log('derived.do()');
+    };
+}
+```
+
+> However, following a clean code principle, I suggest to have names that reveals the intent of the members. That will lead to have distinct names rather than to override members, especially when the above hard to understand trick is necessary.
+
+## `instanceof` keyword
+
+> ⚠️ **TODO**
 
 ## Member inheritance
 

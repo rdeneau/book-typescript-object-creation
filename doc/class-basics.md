@@ -13,7 +13,7 @@ TypeScript goes further on class features, offering member visibility to handle 
 - [ES6 class](#es6-class)
 - [TypeScript class](#typescript-class)
 - [Property declarations](#property-declarations)
-- [Function properties](#function-properties)
+- [Function properties a.k.a instance methods](#function-properties-aka-instance-methods)
 - [Nested classes](#nested-classes)
 - [Class pitfalls and TypeScript safety net](#class-pitfalls-and-typescript-safety-net)
 - [TypeScript interfaces](#typescript-interfaces)
@@ -242,9 +242,9 @@ Analysis:
 - `prop6`: in the object with the default value,
 - `otherArg`: not in the object - just an argument of the function.
 
-## Function properties
+## Function properties a.k.a instance methods
 
-So the object properties are stored directly in the object, each instance having its own state, while the methods are stored in the class/constructor prototype i.e. in the object `__proto__`, all instances sharing the class behaviour.
+The object properties are stored directly in the object, each instance having its own state, while the methods are stored in the class/constructor prototype i.e. in the object `__proto__`, all instances sharing the class behaviour.
 
 An object can also have a _property which is a function_. We are in between state and behaviour. This a useful to split an algorithm into invariant versus variant parts. This kind of properties are conceptually similar to [Strategy](https://en.wikipedia.org/wiki/Strategy_pattern) classes reduced to only one function or a method of the [Template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern). In this case, you may try to refactor to one of these patterns and verify whether it has helped reading the code in revealing its intent more clearly.
 
@@ -326,13 +326,15 @@ Another difficulty with TypeScript classes relates to types:
 
 ## Conclusion
 
-Even with the nicer syntax in ES6, the "class pattern" is still considered as an overkill by a part of JavaScript community:
+Developers with a background in C#, Java or other similar OOP languages are confortable using classes. Indeed, nothing can be outside classes except enum in most of these languages! But it's not true in JavaScript. Even with the nicer syntax in ES6, the "class pattern" is still viewed as an overkill by a part of JavaScript community:
 
 - [`class` isn’t a baby  —  it’s a monster!](https://medium.com/@_ericelliott/class-isn-t-a-baby-it-s-a-monster-807a0f0b1298),
 - [Why Composition is Harder with Classes](https://medium.com/javascript-scene/why-composition-is-harder-with-classes-c3e627dcd0aa).
 
 Indeed, object literals and factories may do the job easier and better in most cases.
 
-But it's quite a different thing with TypeScript classes because there are enough additional features to balance class pattern issues. It's part of what TypeScript offers to enable a classical OOP using for instances [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) and [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)). It can easier and more totally fulfill C#/Java programmer needs. This is one of the reasons why [Angular](https://angular.io/) favors TypeScript and why Angular components are class-based.
+But it's quite a different story with TypeScript classes because there are enough additional features to balance class pattern issues. It's part of what TypeScript offers to enable a classical OOP for instance using [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) and applying [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)). It can fulfill C#/Java programmer needs easier and more completely. This is one of the reasons why [Angular](https://angular.io/) favors TypeScript and why Angular components are class-based.
 
-We have not yet analyse and discuss about [class inheritance](class-inheritance.md), supported by both ES6 and TypeScript. But this conclusion remains valid because we can use classes with or without class inheritance.
+Likewise, some frameworks that offered their own class features have turned back to the standardized ES6 classes, e.g. [React](https://reactjs.org/) and its `React.createClass()` method. Perhaps it's a result of the [Vanilla JavaScript movement](https://en.wikipedia.org/wiki/JavaScript#Vanilla_JavaScript). Be that as it may, I thing it's a good thing because it's more valuable for a team to have consistent coding styles, based on standards, and to write code more decoupled with external frameworks, especially because front/web framework turnover is very fast.
+
+Still we have not yet analyse and discuss about [class inheritance](class-inheritance.md), supported by both ES6 and TypeScript. But this conclusion remains valid because we can use classes with or without class inheritance.

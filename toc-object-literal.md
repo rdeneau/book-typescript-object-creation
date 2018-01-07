@@ -2,5 +2,5 @@
 
 **Chapters:**
 
-* [Basics](doc/object-literal-basics.md)
-* [Advanced features](doc/object-literal-advanced.md)
+1. [Basics](doc/object-literal-basics.md)
+2. [Advanced features](doc/object-literal-advanced.md2)

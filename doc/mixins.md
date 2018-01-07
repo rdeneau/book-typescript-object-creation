@@ -1,4 +1,16 @@
-# Traits
+# Mixin family
+
+> ⚠️ **Work in progress**
+
+## Classical mixins
+
+## Functional mixins
+
+## Subclass factories
+
+## Advanced patterns
+
+## Traits, Talents
 
 In JavaScript, Traits can be implemented via functions and delegations[22] or through libraries that provide traits.[23][24][25]
 

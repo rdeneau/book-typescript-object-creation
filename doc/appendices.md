@@ -2,7 +2,7 @@
 
 ![Me, visiting a nice castle](../img/me.jpg)
 
-Romain Deneau • 📍 Paris, France • 🔗 [@DeneauRomain](https://twitter.com/DeneauRomain), [GitHub](https://github.com/rdeneau), [LinkedIn](https://www.linkedin.com/in/romain-deneau-95481143/)
+Romain Deneau, 📍 Paris, France • [@DeneauRomain](https://twitter.com/DeneauRomain), [GitHub](https://github.com/rdeneau), [LinkedIn](https://www.linkedin.com/in/romain-deneau-95481143/)
 
 ### 📎 Profile
 
@@ -25,4 +25,7 @@ Cover image credit: [web.njit.edu - Creational Design Patterns](https://web.njit
 
 ---
 
-👉 Envoyed reading this book? ★ on [GitBook](https://www.gitbook.com/book/rdeneau/javascript-object-creation-with-typescript/details). 📫 Share: [https://rdeneau.gitbooks.io/javascript-object-creation-with-typescript/](https://rdeneau.gitbooks.io/javascript-object-creation-with-typescript/) 👍
+👉 Envoyed reading this book? 👍
+
+- ⭐️ Star on [GitBook](https://www.gitbook.com/book/rdeneau/javascript-object-creation-with-typescript/details)
+- 📫 Share: [https://rdeneau.gitbooks.io/javascript-object-creation-with-typescript/](https://rdeneau.gitbooks.io/javascript-object-creation-with-typescript/)

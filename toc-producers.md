@@ -1,5 +1,0 @@
-# Object Producers
-
-**Chapters:**
-
-⚠️ TODO 🚧

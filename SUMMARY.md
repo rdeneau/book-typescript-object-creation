@@ -9,9 +9,7 @@
   * [Alternatives to classes](doc/class-alternative.md)
 * [Object Composition](toc-composition.md)
   * [Basics](doc/object-composition.md)
-  * Mixins and more
-* [Object Producers](toc-producers.md)
-  * Factories
-  * Fluent builders
+  * [Mixin family](doc/mixins.md)
+* [Object Producers: Factories, Builders](doc/object-producers.md)
 * [Immutable objects](doc/immutability.md)
 * [About the author](doc/appendices.md)
