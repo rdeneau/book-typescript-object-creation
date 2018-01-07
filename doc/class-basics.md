@@ -25,9 +25,9 @@ TypeScript goes further on class features, offering member visibility to handle 
 
 ## ES6 class
 
-### Syntactical sugar
+### Syntactic sugar
 
-ES6 classes are syntactical sugar for both constructor function (defining properties) and prototype extension (defining methods). So the following class `Todo`:
+ES6 classes are [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) for both constructor function (defining properties) and prototype extension (defining methods). So the following class `Todo`:
 
 ```js
 class Todo {

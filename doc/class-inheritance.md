@@ -40,7 +40,7 @@ It's nice to have two keywords, `extends` and `implements`, to differentiate bet
 
 ## Prototype chain
 
-We have seen that the `class` keyword is just some [syntactical sugar](class-basics.md#syntactical-sugar) over the function `prototype` property. It's the same for the `extends` keyword. The expression `class Child extends Base {}` is equivalent to:
+We have seen that the `class` keyword is just some [syntactic sugar](class-basics.md#syntactic-sugar) over the function `prototype` property. It's the same for the `extends` keyword. The expression `class Child extends Base {}` is equivalent to:
 
 ```js
 __extends(Child, Base);
@@ -89,7 +89,7 @@ The `super` keyword serves two purposes:
 
 ### Base class constructor
 
-In a derived class constructor, `super` is a syntactical sugar for the base class constructor:
+In a derived class constructor, `super` is a syntactic sugar for the base class constructor:
 
 ```ts
 abstract class Person {
@@ -148,7 +148,7 @@ class Child extends Base {
 ```
 
 - `super` has the type of the super class type, here `Base`.
-- `super.do()` is another syntactical sugar, equivalent of `Base.prototype.do.call(this);`.
+- `super.do()` is another syntactic sugar, equivalent of `Base.prototype.do.call(this);`.
 
 Instance methods being directly defined on `this` and not stored in the prototype, there is no need to use `super`: `this.baseInstanceMethod()` will work. But to override a base class instance method and still call this base version, use an arrow function to create a copy of `this`:
 
@@ -319,7 +319,7 @@ The only use case of inheritance IMO is when members of a (base) class need to b
 
 ## Conclusion
 
-Class inheritance has been added to ES6 along with the class support. Both are syntactical sugars that rely on the prototype chain. Feel free to use these new syntaxes instead of older patterns to be more explicit and concise. It's in fact the only fully supported syntaxes in TypeScript.
+Class inheritance has been added to ES6 along with the class support. Both are syntactic sugars that rely on the prototype chain. Feel free to use these new syntaxes instead of older patterns to be more explicit and concise. It's in fact the only fully supported syntaxes in TypeScript.
 
 Regarding class inheritance usage, it appears to be a fast and cheap way to share a behaviour, to factorize code. But it's usually a bad idea for the client code and for future changes in the class hierarchy. Instead of _code reuse_, prefer _design reuse_. The usual examples are given in the [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) that offer their own way to handle a kind of variation in the system, for instance:
 

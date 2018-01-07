@@ -215,7 +215,7 @@ const joe = {
 
 [ValueTuple](https://msdn.microsoft.com/en-us/library/system.valuetuple%28v=vs.110%29.aspx) is a new type: since C# 7.0 (2017). Their purpose is to ease writing a method that returns several values of different types without the ugly [output parameters](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier) and to facilitate their usage:
 
-- Syntactical sugar for both instanciation (1) and type definition (2).
+- There's [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) for both instanciation (i) and type definition (ii).
   1. `var data = (10, "bird");` vs `var data = ValueTuple.Create(10, "bird");`.
   2. `(int, string)` vs `ValueTuple<int, string>`
 - Members can be named implicitly, like a classical [`Tuple`](https://msdn.microsoft.com/en-us/library/system.tuple%28v=vs.110%29.aspx): `Item1`, `Item2`, ...
