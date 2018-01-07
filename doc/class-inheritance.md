@@ -1,7 +1,5 @@
 # Class inheritance
 
-> ⚠️ **Work in progress**
-
 Inheritance is a feature of object-oriented programming (OOP) languages that allows to define:
 
 - a base class, aka superclass, mother class, that provides specific functionality: data and behavior,
@@ -175,7 +173,16 @@ class Child extends Base {
 
 ## `instanceof` keyword
 
-> ⚠️ **TODO**
+The [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) keyword can be used to check the "is-a" relationship between an object and a class. `o instanceof X === true` means:
+
+| Inheritance | Classes             | Declaration | Equivalence                                       |
+|-------------|---------------------|-------------|---------------------------------------------------|
+| None        | `X = Object`        | `o = {}`    | `o.constructor                   === Object`      |
+| None        | `class X`           | `o = new X` | `o.constructor                   === X`           |
+|             |                     |             | `o.__proto__                     === X.prototype` |
+| One level   | `class Y extends X` | `o = new Y` | `o.__proto__.__proto__           === X.prototype` |
+| Two level   | `class Z extends Y` | `o = new Z` | `o.__proto__.__proto__.__proto__ === X.prototype` |
+| Etc.        |                     |             |                                                   |
 
 ## Member inheritance
 

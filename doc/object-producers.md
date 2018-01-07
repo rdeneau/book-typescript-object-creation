@@ -4,6 +4,8 @@
 
 ## Factory functions
 
+A lire : https://medium.com/javascript-scene/javascript-factory-functions-with-es6-4d224591a8b1
+
 => independant functions, avec ou sans arguments. Si sans arguments => un des types de providers de DI container d'Angular
 => class static methods
 

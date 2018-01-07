@@ -13,6 +13,7 @@ Object literal is the simplest way of creating an object. Still, it's already su
 - [ECMAScript 2015](#ecmascript-2015)
 - [Accessors](#accessors)
 - [TypeScript `readonly` keyword](#typescript-readonly-keyword)
+- [Conclusion](#conclusion)
 
 <!-- /TOC -->
 
@@ -144,3 +145,9 @@ function counterFactory(value: number) {
 const foo = counterFactory(1); // [Ts] const foo: { readonly value: number; inc(): number; }
 foo.inc(); // → foo.value = 2
 ```
+
+## Conclusion
+
+JavaScript is different from other OOP languages like C# and Java: it's _object-based_ rather that being class-based. Objects literals are one of the pillars of this aspect. We have seen their basics features, enhanced in ES6 and in TypeScript.
+
+But more subtleties are linked with object literals: the `this` keyword, fat-arrow functions, object destructuring. Let's study them in the next chapter: [Advanced Features](object-literal-advanced.md).
