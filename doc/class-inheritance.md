@@ -133,9 +133,7 @@ These rules help ensuring that:
 
 ### Base class methods
 
-We can use `super` to access the base class methods [^1] the same way we are using `this` for the current class members:
-
-[^1] In TypeScript, only `public` and `protected` methods are callable with `super`. Otherwise, we get the error `Property 'xxx' is private and only accessible within class 'Xyz'`.
+We can use `super` to access the base class methods the same way we are using `this` for the current class members. In TypeScript, only `public` and `protected` methods are callable with `super`. Otherwise, we get the error `Property 'xxx' is private and only accessible within class 'Xyz'`.
 
 ```ts
 abstract class Base {
@@ -175,16 +173,15 @@ class Child extends Base {
 
 ## `instanceof` keyword
 
-The [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) keyword can be used to check the "is-a" relationship between an object and a class. `o instanceof X === true` means:
+The [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) keyword can be used to check the "is-a" relationship between an object and a class. `o instanceof X === true` means, by inheritance depth:
 
-| Inheritance | Classes             | Declaration | Equivalence                                       |
-|-------------|---------------------|-------------|---------------------------------------------------|
-| None        | `X = Object`        | `o = {}`    | `o.constructor                   === Object`      |
-| None        | `class X`           | `o = new X` | `o.constructor                   === X`           |
-|             |                     |             | `o.__proto__                     === X.prototype` |
-| One level   | `class Y extends X` | `o = new Y` | `o.__proto__.__proto__           === X.prototype` |
-| Two level   | `class Z extends Y` | `o = new Z` | `o.__proto__.__proto__.__proto__ === X.prototype` |
-| Etc.        |                     |             |                                                   |
+| Depth | Classes             | `var o =` | Equivalence                                                |
+|:-----:|---------------------|-----------|------------------------------------------------------------|
+|     0 | _None_              | `{}`      | `o.constructor === Object`                                 |
+|     0 | `class X`           | `new X()` | `o.constructor === X` <br /> `o.__proto__ === X.prototype` |
+|     1 | `class Y extends X` | `new Y()` | `o.__proto__.__proto__ === X.prototype`                    |
+|     2 | `class Z extends Y` | `new Z()` | `o.__proto__.__proto__.__proto__ === X.prototype`          |
+| ...   | &nbsp;              | &nbsp;    | &nbsp;                                                     |
 
 ## Member inheritance
 
