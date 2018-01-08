@@ -219,7 +219,7 @@ const joe = {
   1. `var data = (10, "bird");` vs `var data = ValueTuple.Create(10, "bird");`.
   2. `(int, string)` vs `ValueTuple<int, string>`
 - Members can be named implicitly, like a classical [`Tuple`](https://msdn.microsoft.com/en-us/library/system.tuple%28v=vs.110%29.aspx): `Item1`, `Item2`, ...
-- Destructuring is also possible: `var (size, name) = data;`.
+- Destructuring is also possible: `var (size, name) = data;`
 
 #### C# ValueTuple with named members
 

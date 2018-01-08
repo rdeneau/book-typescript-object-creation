@@ -133,7 +133,9 @@ These rules help ensuring that:
 
 ### Base class methods
 
-We can use `super` to access the base class methods from an overriding member the same way we are using `this` for the current class members:
+We can use `super` to access the base class methods [^1] the same way we are using `this` for the current class members:
+
+[^1] In TypeScript, only `public` and `protected` methods are callable with `super`. Otherwise, we get the error `Property 'xxx' is private and only accessible within class 'Xyz'`.
 
 ```ts
 abstract class Base {
@@ -147,7 +149,7 @@ class Child extends Base {
 }
 ```
 
-- `super` has the type of the super class type, here `Base`.
+- `super` has the type of the super class, here `Base`.
 - `super.do()` is another syntactic sugar, equivalent of `Base.prototype.do.call(this);`.
 
 Instance methods being directly defined on `this` and not stored in the prototype, there is no need to use `super`: `this.baseInstanceMethod()` will work. But to override a base class instance method and still call this base version, use an arrow function to create a copy of `this`:
@@ -169,7 +171,7 @@ class Child extends Base {
 }
 ```
 
-> However, following a clean code principle, I suggest to have names that reveals the intent of the members. That will lead to have distinct names rather than to override members, especially when the above hard to understand trick is necessary.
+> However, following a clean code principle, I suggest to have names that reveals the intent of the members. That will lead to have distinct names rather than to override members, especially when the above and hard to understand trick is necessary.
 
 ## `instanceof` keyword
 
@@ -315,7 +317,12 @@ The only use case of inheritance IMO is when members of a (base) class need to b
 - _Too many levels of inheritance_ may lead to a code difficult to understand (cf. [Yo-yo problem](https://en.wikipedia.org/wiki/Yo-yo_problem)) and even more to debug.
 - _Inheritance breaks encapsulation_: properties can be shared between the base class and the derived classes. A couple (base class, derived class) should not be seen as separated classes but rather as a single bigger class. Considering all derived classes at the same inheritance level, they form with their base class a rigid group. Imagine the size and complexity with a deeper hierarchy!
 - [Fragile base class problem](https://en.wikipedia.org/wiki/Fragile_base_class): it's a more insiduous issue that show another type of coupling between a base class and a derived class that complexify modifying the base class. A seemingly safe modifications to a base class, considering only the base class, may cause a bug in a derived class like an infinite loop.
-- At a design level, the base class represents both a dependency and an abstraction for derived classes. Usually, a basic technique to decouple such classes is to introduce interfaces, one for the dependency (for instance injected in the constructor), one for the abstraction (the class implementing the interface defining the abstraction). It's not only impossible to split these roles but also to introduce such interfaces.
+- At a design level, the base class represents both a dependency and an abstraction for derived classes. Usually, a basic technique to decouple such classes is to introduce interfaces, one for the dependency (for instance injected in the constructor), one for the consumer (the class implementing the interface defining the abstraction). It's not only impossible to split these roles, it's also impossible to introduce such interfaces.
+
+More details:
+
+- [Composition over Inheritance, _by Fun Fun Function_](https://medium.com/humans-create-software/composition-over-inheritance-cb6f88070205)
+- [Class Hierarchies? Don't Do That! _by Raganwald_](http://raganwald.com/2014/03/31/class-hierarchies-dont-do-that.html)
 
 ## Conclusion
 

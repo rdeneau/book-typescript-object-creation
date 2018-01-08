@@ -1,4 +1,5 @@
 {
-    "title": "JavaScript Object Creation, Exploring ES5, ES6 and TypeScript",
-    "author": "Romain Deneau"
+    "title": "JavaScript Object Creation: Exploring ES5, ES6 and TypeScript",
+    "author": "Romain Deneau",
+    "plugins" : ["advanced-emoji"]
 }

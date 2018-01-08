@@ -12,4 +12,4 @@
   * [Mixin family](doc/mixins.md)
 * [Object Producers: Factories, Builders](doc/object-producers.md)
 * [Immutable objects](doc/immutability.md)
-* [About the author](doc/appendices.md)
+* [About the author](doc/about.md)

@@ -268,7 +268,7 @@ Hopefully, TypeScript prevents some common mistakes:
 
 ## TypeScript interfaces
 
-Interfaces in TypeScript are used not only to name object and function types, but also to define abstractions. It allows to apply the _"Program to an 'interface', not an 'implementation'"_ advice given in [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns), from which derived the last two [SOL**ID** principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)):
+Interfaces in TypeScript are used not only to name object and function types, but also to define abstractions. It allows to apply the _"Program to an 'interface', not an 'implementation'"_ advice given in [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns), from which derived the last two [SOL**ID** principles](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29):
 
 - [**I**nterface segregation principle (ISP)](https://en.wikipedia.org/wiki/Interface_segregation_principle)
 - [**D**ependency inversion principle (DIP)](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
@@ -333,7 +333,7 @@ Developers with a background in C#, Java or other similar OOP languages are conf
 
 Indeed, object literals and factories may do the job easier and better in most cases.
 
-But it's quite a different story with TypeScript classes because there are enough additional features to balance class pattern issues. It's part of what TypeScript offers to enable a classical OOP for instance using [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) and applying [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)). It can fulfill C#/Java programmer needs easier and more completely. This is one of the reasons why [Angular](https://angular.io/) favors TypeScript and why Angular components are class-based.
+But it's quite a different story with TypeScript classes because there are enough additional features to balance class pattern issues. It's part of what TypeScript offers to enable a classical OOP for instance using [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) and applying [SOLID principles](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29). It can fulfill C#/Java programmer needs easier and more completely. This is one of the reasons why [Angular](https://angular.io/) favors TypeScript and why Angular components are class-based.
 
 Likewise, some frameworks that offered their own class features have turned back to the standardized ES6 classes, e.g. [React](https://reactjs.org/) and its `React.createClass()` method. Perhaps it's a result of the [Vanilla JavaScript movement](https://en.wikipedia.org/wiki/JavaScript#Vanilla_JavaScript). Be that as it may, I thing it's a good thing because it's more valuable for a team to have consistent coding styles, based on standards, and to write code more decoupled with external frameworks, especially because front/web framework turnover is very fast.
 
