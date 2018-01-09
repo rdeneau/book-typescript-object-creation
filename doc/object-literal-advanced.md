@@ -4,6 +4,12 @@
 
 <!--
 
+TODO:
+
+- any, interface, optional property, string map {[name: string]: any/T;}
+- define Property, obkect.assign → interface, type (non extendable)
+
+
 TODO: articles à continuer à lire:
 
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
@@ -24,8 +30,9 @@ TODO: articles à continuer à lire:
     - [Non existent property](#non-existent-property)
     - [Changing a property type](#changing-a-property-type)
 - [Function overloads](#function-overloads)
+- [Comparing objects](#comparing-objects)
 - [Comparison with C# types](#comparison-with-c-types)
-    - [C# anonymous type](#c-anonymous-type)
+    - [C# anonymous types](#c-anonymous-types)
     - [C# ValueTuple](#c-valuetuple)
 - [Conclusion](#conclusion)
 
@@ -128,9 +135,6 @@ In either cases, TypeScript indicates with a warning:
 //TS    ~~ [Error] Property 'do' does not exist on type '{}'
 ```
 
-TODO: any, interface, optional property, string map {[name: string]: any/T;}
-TODO: define Property, obkect.assign → interface, type (non extendable)
-
 ### Changing a property type
 
 If we try to assign to a property a value of a different type, TypeScript will emit a warning:
@@ -180,6 +184,8 @@ const e = factory(1);
 e.value = '';
 ```
 
+_Deleting a property_ may also mean changing its type: if we want a property to be deletable, it means its an optional property and it should be defined with the `?` operator, e.g. `{ a?: any; }`. Actually it's not checked by the TypeScript compiler: we can do `delete o.a` even if `o` type is `{ a: any; }`.
+
 ## Function overloads
 
 Since JavaScript doesn't allow function overloads, it's a common pattern to handle the arguments variation by number or by type directly in the function body. A well-known example is the [jQuery `$()` global function](http://api.jquery.com/jQuery/). In addition to previous typings, to avoid huge union types to define all possible argument types, TypeScript allows the definition of a set of more precise function signatures called [overloads](http://www.typescriptlang.org/docs/handbook/functions.html#overloads). From the function consumer side, it's more convenient.
@@ -188,15 +194,31 @@ More details in [Function Overloads in TypeScript, by Marius Schulz, Aug 2016].
 
 Little warning: make sure of listing all the overloads and then write the main function. The TypeScript FAQ mentions the case of the last signature missing, mixed with the main function: see the question ["Why am I getting Supplied parameters do not match any signature error?"](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-am-i-getting-supplied-parameters-do-not-match-any-signature-error).
 
+## Comparing objects
+
+The comparison of two objects is made by reference, with both `==` and `===` operators, even if `toString` or `valueOf` method is implemented on each object and both return the same value, while these methods are used when comparing (not strictly) the object to a `number` or to a `string`:
+
+```ts
+{} == {}; // false
+
+function createObject() {
+  return {};
+}
+```
+
+- `{} == {}` is false
+- `{ valueOf() { return 1; } } == { valueOf() { return 1; } }` is false
+- `1 == { valueOf() { return 1; } }` is true
+- `1 === { valueOf() { return 1; } }` is false
+- `'abc' == { toString() { return 'abc'; } }` is true
+
 ## Comparison with C# types
 
 C# (i.e. the .NET framework) provides some types that are closed to object literals: anonymous types and value tuples. Values tuples can have members implicitly named, like standard tuples, thus closed to TypeScript tuples i.e. arrays. Notice that these types of objects in C# are meant to be ephemeral.
 
-### C# anonymous type
+### C# anonymous types
 
-[Anonymous types](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/anonymous-types) is a feature of C# 3.0 (2007). It enables to create an object without a predefined class, just by specifying couple of key/values, just like JavaScript object literals, and by using the [`var`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var) keyword also introduced with C# 3.0: `var joe = new { Name = 'Joe', Age = 30 };`.
-
-Anonymous types have some limitations: _immutable_ (no fields, only properties with getter only) and _scoped_ (the type is not visible outside the current method but as `Object`). But a friendly `ToString()` method is also implemented so that `joe.ToString()` returns `{ Name = 'Joe', Age = 30 }`.
+[Anonymous type](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/anonymous-types) is a feature of C# 3.0 (2007). It enables to create an object without a predefined class, just by specifying couple of key/values, just like JavaScript object literals, and by using the [`var`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var) keyword also introduced with C# 3.0 for the implicit typing: `var joe = new { Name = "Joe", Age = 30 };`.
 
 ```cs
 var joe = new { Name = "Joe", Age = 30 };
@@ -211,6 +233,16 @@ const joe = {
 };
 ```
 
+Anonymous types are provided with some built-in features:
+
+- Instances are immutable: there are no fields but only readonly properties,
+- Their types are "scoped": they are not visible outside the current method, but as `Object`.
+- Friendly [`ToString()`](https://msdn.microsoft.com/en-us/library/system.object.tostring(v=vs.110).aspx) methods: `joe.ToString()` returns `{ Name = "Joe", Age = 30 }`.
+- Comparison by value instead of by reference: considering another instance `var joe2 = new { Name = "Joe", Age = 30 };`, we have:
+  - Same [`GetHashCode()`](https://msdn.microsoft.com/en-us/library/system.object.gethashcode%28v=vs.110%29.aspx) _(useful for [`Dictionary`](https://msdn.microsoft.com/en-us/library/xfhwa508%28v=vs.110%29.aspx) keys)_: `joe.GetHashCode() == joe2.GetHashCode()` is true.
+  - Implementing [IEquatable<T>](https://msdn.microsoft.com/en-us/library/ms131187%28v=vs.110%29.aspx) _(useful in [LINQ queries](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/getting-started-with-linq))_: `joe.Equals(joe2)` is true.
+  - Not overriding the `==` operator: `joe == joe2` is false.
+
 ### C# ValueTuple
 
 [ValueTuple](https://msdn.microsoft.com/en-us/library/system.valuetuple%28v=vs.110%29.aspx) is a new type: since C# 7.0 (2017). Their purpose is to ease writing a method that returns several values of different types without the ugly [output parameters](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier) and to facilitate their usage:
@@ -224,7 +256,7 @@ const joe = {
 #### C# ValueTuple with named members
 
 ```cs
-var joe = (name: "Joe", age: 30); // (string name, int age)
+var joe = (name: "Joe", age: 30); // Type: (string name, int age)
 joe.age++; // → 31
 var (name, age) = joe; // Destructuring
 ```
@@ -232,7 +264,7 @@ var (name, age) = joe; // Destructuring
 TypeScript equivalent:
 
 ```ts
-const joe = { name: 'Joe', age: 30 }; // { name: string; age: number; }
+const joe = { name: 'Joe', age: 30 }; // Type: { name: string; age: number; }
 joe.age++; // → 31
 const { name, age } = joe; // Object destructuring
 ```
@@ -240,10 +272,12 @@ const { name, age } = joe; // Object destructuring
 #### C# ValueTuple with implicit member naming
 
 ```cs
-var joe = ("Joe", 30); // (string, int) i.e. ValueTuple<string, int>
+var joe = ("Joe", 30); // Type: (string, int) i.e. ValueTuple<string, int>
 joe.Item2++; // → 31
 var (name, age) = joe; // Destructuring
-var joe2 = Tuple.Create("Joe", 30); // Tuple<string, int>
+
+// Quasi-equivalent Tuple:
+var joe2 = Tuple.Create("Joe", 30); // Type: Tuple<string, int>
 ```
 
 TypeScript equivalents:
@@ -254,7 +288,7 @@ const joe = { Item1: 'Joe', Item2: 30 };
 const { name, age } = joe; // Object destructuring
 
 // Tuple
-const joe3 = ['Joe', 30]; // [string, number]
+const joe3 = ['Joe', 30]; // Type: [string, number]
 joe3[0]; // → "Joe"
 const [name, age] = joe3; // Array destructuring
 ```
@@ -262,8 +296,12 @@ const [name, age] = joe3; // Array destructuring
 #### Differences with anonymous types
 
 - Members are public fields i.e. mutable.
-- Types are not scoped: it's easy to use them as returned value from a method.
-- `ValueTuple` is a `struct`, not a `class`. The difference is mainly in the memory management that has no JavaScript equivalent.
+- Types are not scoped: it's easy to use a `ValueTuple` as a method returned value, using the syntactic sugar to define the returned type and the returned value.
+- `ValueTuple` is a `struct`, not a `class`:
+  - it cannot be inherited
+  - instances are stored in memory directly in the stack rather than in the heap [^1].
+
+[^1] This last point is not very meaningful in JavaScript: it's not in the specifications. It's rather a matter of JavaScript engine details.
 
 ## Conclusion
 
